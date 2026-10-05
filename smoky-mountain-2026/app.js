@@ -8,6 +8,7 @@
   const main = $('#gallery');
   const nav = $('#daynav-inner');
   const play = '<svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg>';
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const fmt = s => { s = Math.round(s); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
 
   G.sections.forEach(sec => {
@@ -49,12 +50,15 @@
     b.appendChild(img);
     if (it.type === 'video') {
       b.insertAdjacentHTML('beforeend', `<span class="badge">${play}${fmt(it.duration)}</span>`);
-      b.addEventListener('mouseenter', () => {
+      let hT;
+      b.addEventListener('mouseenter', () => { if (canHover) hT = setTimeout(startPreview, 200); });
+      const startPreview = () => {
+        if (document.body.classList.contains('is-scrolling')) return;
         let v = b.querySelector('video');
         if (!v) { v = document.createElement('video'); v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto'; v.src = it.preview; b.insertBefore(v, b.children[1]); }
         v.play().then(() => b.classList.add('playing')).catch(() => {});
-      });
-      b.addEventListener('mouseleave', () => { const v = b.querySelector('video'); if (v) { v.pause(); b.classList.remove('playing'); } });
+      };
+      b.addEventListener('mouseleave', () => { clearTimeout(hT); const v = b.querySelector('video'); if (v) { v.pause(); b.classList.remove('playing'); } });
     }
     b.addEventListener('click', () => openLB(it.index));
     return b;
@@ -63,7 +67,7 @@
   function layoutGrid(grid) {
     const W = grid.clientWidth; if (!W) return;
     const gap = W < 700 ? 3 : 6;
-    const target = W < 500 ? 150 : W < 900 ? 200 : W < 1400 ? 260 : 300;
+    const target = W < 500 ? 175 : W < 900 ? 210 : W < 1400 ? 260 : 300;
     if (grid._w === W) return; grid._w = W;
     grid.innerHTML = '';
     const items = grid._items;
@@ -80,8 +84,17 @@
       grid.appendChild(r); row = []; ratio = 0;
     };
     items.forEach(it => {
-      row.push(it); ratio += it.w / it.h;
-      if ((W - gap * (row.length - 1)) / ratio <= target) flush(false);
+      const r = it.w / it.h;
+      const hWith = (W - gap * row.length) / (ratio + r);
+      if (row.length && hWith < target) {
+        // row is full: end it either before or after this item, whichever lands closer to the target height
+        const hWithout = (W - gap * (row.length - 1)) / ratio;
+        if (Math.abs(hWithout - target) < Math.abs(hWith - target)) { flush(false); row.push(it); ratio = r; }
+        else { row.push(it); ratio += r; flush(false); }
+        return;
+      }
+      row.push(it); ratio += r;
+      if (row.length === 1 && W / ratio <= target) flush(false);
     });
     if (row.length) flush(true);
   }
@@ -92,11 +105,22 @@
 
   // ---------- Active day in nav ----------
   const links = [...nav.querySelectorAll('a')];
+  links.forEach(l => l.addEventListener('click', e => {
+    const t = document.getElementById(l.dataset.key); if (!t) return;
+    e.preventDefault();
+    window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - 70, behavior: 'smooth' });
+    history.replaceState(null, '', '#' + l.dataset.key);
+  }));
+  // pause hover effects while the page is moving so tiles sliding under the cursor don't trigger work
+  let sT; window.addEventListener('scroll', () => {
+    document.body.classList.add('is-scrolling'); clearTimeout(sT);
+    sT = setTimeout(() => document.body.classList.remove('is-scrolling'), 150);
+  }, { passive: true });
   const io = new IntersectionObserver(es => {
     es.forEach(e => {
       if (e.isIntersecting) {
         links.forEach(l => l.classList.toggle('active', l.dataset.key === e.target.id));
-        const act = nav.querySelector('.active'); if (act) act.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+        const act = nav.querySelector('.active'); if (act) nav.scrollTo({ left: act.offsetLeft - (nav.clientWidth - act.offsetWidth) / 2, behavior: 'smooth' });
       }
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
