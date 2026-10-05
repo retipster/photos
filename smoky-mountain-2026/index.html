@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REtipster Inner Circle | Smoky Mountain Mastermind 2026</title>
+<meta name="description" content="Photos and video from the REtipster Inner Circle Smoky Mountain Mastermind, September 29 to October 2, 2026.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="REtipster Inner Circle: Smoky Mountain Mastermind 2026">
+<meta property="og:description" content="The best photos and video from four days in the Great Smoky Mountains.">
+<meta property="og:image" content="https://photos.retipster.com/smoky-mountain-2026/assets/og-album.jpg">
+<meta property="og:url" content="https://photos.retipster.com/smoky-mountain-2026/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=6">
+</head>
+<body>
+
+<header class="hero">
+  <div class="topbar">
+    <a href="https://retipster.com" class="logo" aria-label="REtipster"><img src="assets/logo-white.svg" alt="REtipster"></a>
+    <button class="btn btn-ghost" data-share-album>
+      <svg viewBox="0 0 24 24"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v13"/></svg>
+      Share album
+    </button>
+  </div>
+  <div class="hero-text">
+    <p class="eyebrow">September 29 to October 2, 2026 &middot; Great Smoky Mountains, Tennessee</p>
+    <h1>REtipster Inner Circle</h1>
+    <p class="subtitle">Smoky Mountain Mastermind 2026</p>
+    <p class="counts" id="counts"></p>
+  </div>
+  <figure class="hero-photo">
+    <img src="assets/hero.jpg" alt="The whole Inner Circle group waving from the cabin balcony" width="3000" height="935">
+  </figure>
+</header>
+
+<nav class="daynav" id="daynav"><div class="daynav-inner" id="daynav-inner"></div></nav>
+
+<main id="gallery"></main>
+
+<footer class="footer">
+  <img src="assets/logo-white.svg" alt="REtipster" class="footer-logo">
+  <p>Photography and video by Tommy. Tap any photo or clip to see it full screen or share it.</p>
+  <p class="small">&copy; 2026 REtipster.com</p>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Media viewer">
+  <div class="lb-top">
+    <div class="lb-meta"><span id="lb-title"></span><span id="lb-count"></span></div>
+    <div class="lb-actions">
+      <button class="lb-btn" id="lb-share" title="Share">
+        <svg viewBox="0 0 24 24"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v13"/></svg><span>Share</span>
+      </button>
+      <button class="lb-btn lb-close" id="lb-close" title="Close (Esc)">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+  <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <div class="lb-stage" id="lb-stage"></div>
+  <button class="lb-nav lb-next" id="lb-next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
+
+<div class="sharesheet" id="sharesheet" aria-hidden="true">
+  <div class="ss-card">
+    <p class="ss-title" id="ss-title">Share</p>
+    <div class="ss-grid">
+      <a id="ss-fb" target="_blank" rel="noopener">Facebook</a>
+      <a id="ss-x" target="_blank" rel="noopener">X</a>
+      <a id="ss-li" target="_blank" rel="noopener">LinkedIn</a>
+      <a id="ss-mail">Email</a>
+    </div>
+    <div class="ss-copy"><input id="ss-url" readonly><button id="ss-copybtn">Copy link</button></div>
+    <button class="ss-cancel" id="ss-cancel">Close</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="data.js?v=6"></script>
+<script src="app.js?v=6"></script>
+</body>
+</html>
