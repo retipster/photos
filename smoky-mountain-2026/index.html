@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=7">
+<link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
 
@@ -45,20 +45,34 @@
     <h1>REtipster Inner Circle</h1>
     <p class="subtitle">Smoky Mountain Mastermind 2026</p>
     <p class="counts" id="counts"></p>
+    <a class="next-cta" href="https://meet.retipster.com/" target="_blank" rel="noopener">
+      <span class="next-label">Next mastermind</span>
+      <span class="next-where">Orlando, FL &middot; April 13 to 17, 2027</span>
+      <span class="next-btn">Apply to join <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
   </div>
   <figure class="hero-photo">
     <img src="assets/hero.jpg" alt="The whole Inner Circle group waving from the cabin balcony" width="3000" height="935">
   </figure>
 </header>
 
-<nav class="daynav" id="daynav"><div class="daynav-inner" id="daynav-inner"></div></nav>
+<nav class="daynav" id="daynav"><div class="daynav-bar"><div class="daynav-inner" id="daynav-inner"></div><a class="nav-apply" href="https://meet.retipster.com/" target="_blank" rel="noopener">Apply for 2027</a></div></nav>
 
 <main id="gallery"></main>
 
+<section class="join" id="join">
+  <div class="join-card">
+    <p class="join-eyebrow">REtipster Inner Circle 2027</p>
+    <h2>Want to be at the next one?</h2>
+    <p class="join-text">Our next mastermind is April 13 to 17, 2027, at a private retreat in Orlando, Florida. Four days with experienced land investors, no stages and no sales pitches. It's limited to 25 people.</p>
+    <a class="btn btn-blue join-btn" href="https://meet.retipster.com/" target="_blank" rel="noopener">Apply to join <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
 <footer class="footer">
   <img src="assets/logo-white.svg" alt="REtipster" class="footer-logo">
-  <p>Photography and video by Tommy. Tap any photo or clip to see it full screen or share it.</p>
-  <p class="small">&copy; 2026 REtipster.com</p>
+  <p>Photography and video by <a href="https://www.instagram.com/tommys.lyfe/" target="_blank" rel="noopener">Tommy Wilson</a>. Tap any photo or clip to see it full screen or share it.</p>
+  <p class="small">&copy; 2026 REtipster Publishing LLC</p>
 </footer>
 
 <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Media viewer">
@@ -94,7 +108,7 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="data.js?v=7"></script>
-<script src="app.js?v=7"></script>
+<script src="data.js?v=9"></script>
+<script src="app.js?v=9"></script>
 </body>
 </html>
